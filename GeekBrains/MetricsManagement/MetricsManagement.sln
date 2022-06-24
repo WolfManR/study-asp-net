@@ -7,9 +7,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Agent", "Agent", "{2A39A23D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{CEFF3FC4-3476-4554-B8C9-F5B938A89026}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsManagement.Agent", "Agent\MetricsManagement.Agent\MetricsManagement.Agent.csproj", "{A86062C9-89AE-454D-9388-D18692B2254B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A86062C9-89AE-454D-9388-D18692B2254B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86062C9-89AE-454D-9388-D18692B2254B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86062C9-89AE-454D-9388-D18692B2254B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86062C9-89AE-454D-9388-D18692B2254B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A86062C9-89AE-454D-9388-D18692B2254B} = {2A39A23D-4695-46CF-81F6-3CC7D05C5F84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2326F98F-459C-4C7A-8846-428B68223B6C}
