@@ -1,8 +1,31 @@
+using MetricsManagement.Agent.Data;
+using MetricsManagement.Agent.Jobs;
+
+using Quartz;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<Repository>();
+
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    q.ScheduleJob<ProcessorTimeJob>(t => t
+        .StartNow()
+        .WithSimpleSchedule(s => s.RepeatForever().WithIntervalInMinutes(1))
+    );
+});
+
+builder.Services.AddQuartzHostedService(options =>
+{
+    // when shutting down we want jobs to complete gracefully
+    options.WaitForJobsToComplete = true;
+});
 
 var app = builder.Build();
 
