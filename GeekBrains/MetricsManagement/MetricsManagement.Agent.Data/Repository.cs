@@ -1,6 +1,6 @@
 ﻿namespace MetricsManagement.Agent.Data
 {
-    public abstract class Repository
+    public class Repository
     {
         private static List<Metric> _metrics = new();
         public string TableName { get; set; }
@@ -21,8 +21,8 @@
             }
 
             var (min, max) = fromSeconds > toSeconds
-                ? (fromSeconds, toSeconds)
-                : (toSeconds, fromSeconds);
+                ? (toSeconds, fromSeconds)
+                : (fromSeconds, toSeconds);
 
             return _metrics.Where(e=>e.Time >= min && e.Time < max);
         }
