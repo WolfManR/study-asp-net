@@ -33,10 +33,6 @@ public class ProcessorTimeJob : IJob
         {
             _logger.LogError("Cant create processor time metric, metric value overflow limit of integer", e);
         }
-        //catch (SQLiteException e) when (e.Message.Contains("no such table"))
-        //{
-        //    _logger.LogDebug("Table for processor time metrics still not exist");
-        //}
         catch (Exception e)
         {
             _logger.LogError("Cant save processor time metric", e);

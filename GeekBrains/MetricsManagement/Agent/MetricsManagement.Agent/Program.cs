@@ -15,10 +15,7 @@ builder.Services.AddQuartz(q =>
 {
     q.UseMicrosoftDependencyInjectionJobFactory();
 
-    q.ScheduleJob<ProcessorTimeJob>(t => t
-        .StartNow()
-        .WithSimpleSchedule(s => s.RepeatForever().WithIntervalInMinutes(1))
-    );
+    q.ScheduleJob<ProcessorTimeJob>(ConfigureJobTrigger);
 });
 
 builder.Services.AddQuartzHostedService(options =>
@@ -38,3 +35,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.Run();
+
+static void ConfigureJobTrigger(ITriggerConfigurator t) => t
+        .StartNow()
+        .WithSimpleSchedule(s => s.RepeatForever()
+        .WithIntervalInMinutes(1));
