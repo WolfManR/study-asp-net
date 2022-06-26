@@ -33,6 +33,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("windows/processor-time/total", (Repository repository) =>
+{
+    var metrics = repository.Get(DateTimeOffset.Now.AddHours(-12), DateTimeOffset.Now);
+    return Results.Ok(metrics);
+});
 
 app.Run();
 
