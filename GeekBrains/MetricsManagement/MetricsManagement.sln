@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetricsManagement.Agent.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsManagement.Manager", "Manager\MetricsManagement.Manager\MetricsManagement.Manager.csproj", "{9A37DAE1-D4E3-4A43-853D-D64BC28DDBFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsManagement.Manager.Data", "Manager\MetricsManagement.Manager.Data\MetricsManagement.Manager.Data.csproj", "{7113E8F9-F817-40D4-97A9-CB769DB45DD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9A37DAE1-D4E3-4A43-853D-D64BC28DDBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A37DAE1-D4E3-4A43-853D-D64BC28DDBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A37DAE1-D4E3-4A43-853D-D64BC28DDBFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7113E8F9-F817-40D4-97A9-CB769DB45DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7113E8F9-F817-40D4-97A9-CB769DB45DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7113E8F9-F817-40D4-97A9-CB769DB45DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7113E8F9-F817-40D4-97A9-CB769DB45DD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{A86062C9-89AE-454D-9388-D18692B2254B} = {2A39A23D-4695-46CF-81F6-3CC7D05C5F84}
 		{51D473EA-046F-423A-A494-0C76EEB2B571} = {2A39A23D-4695-46CF-81F6-3CC7D05C5F84}
 		{9A37DAE1-D4E3-4A43-853D-D64BC28DDBFD} = {CEFF3FC4-3476-4554-B8C9-F5B938A89026}
+		{7113E8F9-F817-40D4-97A9-CB769DB45DD4} = {CEFF3FC4-3476-4554-B8C9-F5B938A89026}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2326F98F-459C-4C7A-8846-428B68223B6C}
