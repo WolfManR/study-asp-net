@@ -29,7 +29,9 @@ public class MetricsRepository
 
     public DateTimeOffset GetAgentLastMetricDate(int agentId)
     {
-        var time = _metrics.Where(e => e.AgentId == agentId).Max(e => e.Time);
+        var agentMetrics = _metrics.Where(e => e.AgentId == agentId).ToArray();
+        if (agentMetrics.Length == 0) return DateTimeOffset.MinValue;
+        var time = agentMetrics.Max(e => e.Time);
         return DateTimeOffset.FromUnixTimeSeconds(time);
     }
 }
