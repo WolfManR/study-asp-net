@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using MetricsManagement.Manager.Data;
 
 namespace MetricsManagement.Manager.Client;
 
@@ -12,13 +11,13 @@ public class MetricsClient
         _client = client;
     }
 
-    public async Task<ICollection<Metric>> GetMetrics(string agentUri, string metricUri, DateTimeOffset from, DateTimeOffset to)
+    public async Task<ICollection<AgentMetric>> GetMetrics(string agentUri, string metricUri, DateTimeOffset from, DateTimeOffset to)
     {
         using var response = await _client.GetAsync($"{agentUri}/{metricUri}", HttpCompletionOption.ResponseHeadersRead);
-        if (!response.IsSuccessStatusCode) return Array.Empty<Metric>();
+        if (!response.IsSuccessStatusCode) return Array.Empty<AgentMetric>();
 
         await using var stream = await response.Content.ReadAsStreamAsync();
-        var result = await JsonSerializer.DeserializeAsync<ICollection<Metric>>(stream);
-        return result ?? Array.Empty<Metric>();
+        var result = await JsonSerializer.DeserializeAsync<ICollection<AgentMetric>>(stream);
+        return result ?? Array.Empty<AgentMetric>();
     }
 }
