@@ -4,10 +4,11 @@ public class AgentsRepository
 {
     private static readonly List<Agent> _agents = new List<Agent>();
 
-    public void Register(string uri)
+    public int Register(string uri)
     {
         var entity = new Agent(uri) {Id = _agents.Count, IsEnabled = true };
         _agents.Add(entity);
+        return entity.Id;
     }
 
     public void Enable(int id)
@@ -26,6 +27,6 @@ public class AgentsRepository
 
     public IEnumerable<Agent> Get()
     {
-        return _agents;
+        return _agents.ToArray();
     }
 }
