@@ -17,7 +17,7 @@ public class MetricsClient
         if (!response.IsSuccessStatusCode) return Array.Empty<AgentMetric>();
 
         await using var stream = await response.Content.ReadAsStreamAsync();
-        var result = await JsonSerializer.DeserializeAsync<ICollection<AgentMetric>>(stream);
+        var result = await JsonSerializer.DeserializeAsync<ICollection<AgentMetric>>(stream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         return result ?? Array.Empty<AgentMetric>();
     }
 }
