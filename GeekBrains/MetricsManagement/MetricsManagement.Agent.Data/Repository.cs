@@ -2,12 +2,21 @@
 {
     public class Repository
     {
-        private static List<Metric> _metrics = new();
-        public string TableName { get; set; }
+        private readonly IStorageStrategy _storageStrategy;
+
+        public Repository(IStorageStrategy storageStrategy)
+        {
+            _storageStrategy = storageStrategy;
+        }
+
+        public string TableName
+        {
+            set => _storageStrategy.TableName = value;
+        }
 
         public void Create(int value, long time)
         {
-            _metrics.Add(new(){Value = value, Time = time});
+            _storageStrategy.Create(value, time);
         }
 
         public IEnumerable<Metric> Get(DateTimeOffset from, DateTimeOffset to)
@@ -17,14 +26,14 @@
 
             if (fromSeconds == toSeconds)
             {
-                return _metrics.Where(e => e.Time == fromSeconds);
+                return _storageStrategy.Get(fromSeconds);
             }
 
             var (min, max) = fromSeconds > toSeconds
                 ? (toSeconds, fromSeconds)
                 : (fromSeconds, toSeconds);
 
-            return _metrics.Where(e=>e.Time >= min && e.Time < max);
+            return _storageStrategy.Get(min, max);
         }
     }
 }

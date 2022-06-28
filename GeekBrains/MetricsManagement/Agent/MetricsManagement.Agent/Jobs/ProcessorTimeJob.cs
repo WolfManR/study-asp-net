@@ -16,7 +16,7 @@ public class ProcessorTimeJob : IJob
     public ProcessorTimeJob(Repository repository, ILogger<ProcessorTimeJob> logger)
     {
         _repository = repository;
-        _repository.TableName = "processorTime";
+        _repository.TableName = MetricsTables.ProcessTimeTotal;
         _logger = logger;
         _listener = new("Processor", "% Processor Time", "_total");
     }
