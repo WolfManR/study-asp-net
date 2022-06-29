@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MetricsManagement.Agent.Data\MetricsManagement.Agent.Data.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\MetricsManagement.Agent.Data\MetricsManagement.Agent.Data.csproj" />
   </ItemGroup>
 
 </Project>

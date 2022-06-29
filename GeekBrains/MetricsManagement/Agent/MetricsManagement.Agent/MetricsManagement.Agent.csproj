@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MetricsManagement.Agent.Data\MetricsManagement.Agent.Data.csproj" />
     <ProjectReference Include="..\MetricsManagement.Agent.Data.Dapper\MetricsManagement.Agent.Data.Dapper.csproj" />
+    <ProjectReference Include="..\MetricsManagement.Agent.Data\MetricsManagement.Agent.Data.csproj" />
   </ItemGroup>
 
 </Project>
