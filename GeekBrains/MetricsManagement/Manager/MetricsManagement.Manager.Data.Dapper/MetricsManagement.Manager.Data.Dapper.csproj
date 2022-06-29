@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MetricsManagement.Manager.Data\MetricsManagement.Manager.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

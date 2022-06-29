@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Jobs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MetricsManagement.Agent.Data.Dapper\MetricsManagement.Agent.Data.Dapper.csproj" />
     <ProjectReference Include="..\MetricsManagement.Agent.Data\MetricsManagement.Agent.Data.csproj" />
   </ItemGroup>

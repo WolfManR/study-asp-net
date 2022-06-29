@@ -1,9 +1,8 @@
-﻿namespace MetricsManagement.Manager.Data
+﻿namespace MetricsManagement.Manager.Data;
+
+public class Agent
 {
-    public class Agent
-    {
-        public int Id { get; init; }
-        public string Uri { get; init; }
-        public bool IsEnabled { get; set; }
-    }
+    public int Id { get; init; }
+    public string Uri { get; init; }
+    public bool IsEnabled { get; set; }
 }
