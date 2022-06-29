@@ -2,31 +2,30 @@
 
 public class AgentsRepository
 {
-    private static readonly List<Agent> _agents = new List<Agent>();
+    private readonly IAgentsStorageStrategy _storageStrategy;
+
+    public AgentsRepository(IAgentsStorageStrategy storageStrategy)
+    {
+        _storageStrategy = storageStrategy;
+    }
 
     public int Register(string uri)
     {
-        var entity = new Agent(uri) {Id = _agents.Count, IsEnabled = true };
-        _agents.Add(entity);
-        return entity.Id;
+        return _storageStrategy.Register(uri);
     }
 
     public void Enable(int id)
     {
-        var agent = _agents.SingleOrDefault(e => e.Id == id);
-        if(agent is null) return;
-        agent.IsEnabled = true;
+        _storageStrategy.Enable(id);
     }
 
     public void Disable(int id)
     {
-        var agent = _agents.SingleOrDefault(e => e.Id == id);
-        if(agent is null) return;
-        agent.IsEnabled = false;
+        _storageStrategy.Disable(id);
     }
 
     public IEnumerable<Agent> Get()
     {
-        return _agents.ToArray();
+        return _storageStrategy.Get();
     }
 }

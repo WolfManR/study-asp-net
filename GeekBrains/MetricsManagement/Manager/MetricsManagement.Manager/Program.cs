@@ -1,5 +1,9 @@
+using FluentMigrator.Runner;
+
 using MetricsManagement.Manager.Client;
 using MetricsManagement.Manager.Data;
+using MetricsManagement.Manager.Data.Dapper;
+using MetricsManagement.Manager.Data.Dapper.Migrations;
 using MetricsManagement.Manager.Jobs;
 
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +16,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var connectionString = builder.Configuration.GetConnectionString("Default");
+
+builder.Services.AddFluentMigratorCore()
+    .ConfigureRunner(rb => rb
+        .AddSQLite()
+        .WithGlobalConnectionString(connectionString)
+        .ScanIn(typeof(MigrationRules).Assembly).For.Migrations())
+    .AddLogging(logging => logging.AddFluentMigratorConsole());
+
+builder.Services.AddSingleton<IDbConnector>(new SQLiteConnector(connectionString));
+builder.Services.AddTransient<IAgentsStorageStrategy, AgentsDapperStorageStrategy>();
+builder.Services.AddTransient<IMetricsStorageStrategy, MetricsDapperStorageStrategy>();
 
 builder.Services.AddHttpClient<MetricsClient>();
 builder.Services.AddTransient<AgentsRepository>();
@@ -65,9 +82,15 @@ app.MapPost("agents", ([FromServices] AgentsRepository agentsRepository) =>
 
 app.MapGet("metrics", (int agentId, [FromServices] MetricsRepository repository) =>
 {
+    repository.TableName = MetricsTables.ProcessTimeTotal;
     var metrics = repository.Get(agentId, DateTimeOffset.Now.AddHours(-12), DateTimeOffset.Now);
     return Results.Ok(metrics);
 });
+
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<IMigrationRunner>().MigrateUp();
+}
 
 app.Run();
 

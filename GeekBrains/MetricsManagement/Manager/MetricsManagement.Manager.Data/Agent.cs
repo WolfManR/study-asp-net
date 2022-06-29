@@ -2,10 +2,8 @@
 {
     public class Agent
     {
-        public Agent(string uri) => Uri = uri;
-
         public int Id { get; init; }
-        public string Uri { get; }
+        public string Uri { get; init; }
         public bool IsEnabled { get; set; }
     }
 }

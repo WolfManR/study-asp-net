@@ -20,6 +20,7 @@ public class ProcessorTimeJob : IJob
         _client = client;
         _agentsRepository = agentsRepository;
         _metricsRepository = metricsRepository;
+        _metricsRepository.TableName = MetricsTables.ProcessTimeTotal;
         _logger = logger;
     }
 

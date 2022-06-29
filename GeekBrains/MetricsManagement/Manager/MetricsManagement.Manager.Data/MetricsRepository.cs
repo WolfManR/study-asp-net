@@ -2,12 +2,18 @@
 
 public class MetricsRepository
 {
-    private static List<Metric> _metrics = new();
-    public string TableName { get; set; }
+    private readonly IMetricsStorageStrategy _storageStrategy;
+
+    public MetricsRepository(IMetricsStorageStrategy storageStrategy)
+    {
+        _storageStrategy = storageStrategy;
+    }
+
+    public string? TableName { set => _storageStrategy.TableName = value; }
 
     public void Create(int agentId, int value, long time)
     {
-        _metrics.Add(new() {AgentId = agentId, Value = value, Time = time });
+        _storageStrategy.Create(agentId, value, time);
     }
 
     public IEnumerable<Metric> Get(int agentId, DateTimeOffset from, DateTimeOffset to)
@@ -17,21 +23,21 @@ public class MetricsRepository
 
         if (fromSeconds == toSeconds)
         {
-            return _metrics.Where(e => e.AgentId == agentId && e.Time == fromSeconds);
+            return _storageStrategy.Get(agentId, fromSeconds);
         }
 
         var (min, max) = fromSeconds > toSeconds
             ? (toSeconds, fromSeconds)
             : (fromSeconds, toSeconds);
 
-        return _metrics.Where(e => e.AgentId == agentId && e.Time >= min && e.Time < max);
+        return _storageStrategy.Get(agentId, min, max);
     }
 
     public DateTimeOffset GetAgentLastMetricDate(int agentId)
     {
-        var agentMetrics = _metrics.Where(e => e.AgentId == agentId).ToArray();
-        if (agentMetrics.Length == 0) return DateTimeOffset.MinValue;
-        var time = agentMetrics.Max(e => e.Time);
-        return DateTimeOffset.FromUnixTimeSeconds(time);
+        var time = _storageStrategy.GetAgentLastMetricDate(agentId);
+        return time > 0
+            ? DateTimeOffset.FromUnixTimeSeconds(time)
+            : DateTimeOffset.MinValue;
     }
 }
