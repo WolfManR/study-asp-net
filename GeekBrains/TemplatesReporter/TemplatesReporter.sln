@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Mail.Razo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.AuthenticationRules", "TemplatesReporter.AuthenticationRules\TemplatesReporter.AuthenticationRules.csproj", "{8860F6B9-A425-4ED5-941B-B11008F220B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{D8D52FC8-5AA5-4119-9452-D53C0D93ACCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Authentication.Data", "TemplatesReporter.Authentication.Data\TemplatesReporter.Authentication.Data.csproj", "{50D6801A-7414-40C8-8C6D-0FF1A762362D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,17 @@ Global
 		{8860F6B9-A425-4ED5-941B-B11008F220B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8860F6B9-A425-4ED5-941B-B11008F220B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8860F6B9-A425-4ED5-941B-B11008F220B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D6801A-7414-40C8-8C6D-0FF1A762362D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D6801A-7414-40C8-8C6D-0FF1A762362D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D6801A-7414-40C8-8C6D-0FF1A762362D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D6801A-7414-40C8-8C6D-0FF1A762362D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8860F6B9-A425-4ED5-941B-B11008F220B8} = {D8D52FC8-5AA5-4119-9452-D53C0D93ACCD}
+		{50D6801A-7414-40C8-8C6D-0FF1A762362D} = {D8D52FC8-5AA5-4119-9452-D53C0D93ACCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58AD6A38-B51F-4D33-8249-98A6DA89E7DF}
