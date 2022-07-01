@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Mail.Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Mail.MailKit", "TemplatesReporter.Mail.MailKit\TemplatesReporter.Mail.MailKit.csproj", "{453BE837-2459-4C3E-BA52-FB13CE209015}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Mail.RazorEngineCore", "TemplatesReporter.Mail.RazorEngineCore\TemplatesReporter.Mail.RazorEngineCore.csproj", "{ECCCBEEB-2E8D-4954-A978-CE3FDEDA1531}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{453BE837-2459-4C3E-BA52-FB13CE209015}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{453BE837-2459-4C3E-BA52-FB13CE209015}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{453BE837-2459-4C3E-BA52-FB13CE209015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECCCBEEB-2E8D-4954-A978-CE3FDEDA1531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCCBEEB-2E8D-4954-A978-CE3FDEDA1531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCCBEEB-2E8D-4954-A978-CE3FDEDA1531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCCBEEB-2E8D-4954-A978-CE3FDEDA1531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
