@@ -1,0 +1,85 @@
+﻿@using TemplatesReporter.ApiClients
+@using TemplatesReporter.Mail.Core
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject EmailSendService _emailSendService
+@inject ProtectedLocalStorage _protectedLocalStorage
+
+<div class="mt-2 mb-5 col-md-12">
+	<EditForm Model="SendForm">
+		<EmailAddressesEditor Header="To:" Addresses="SendToList"></EmailAddressesEditor>
+		<EmailAddressesEditor Header="From:" Addresses="SendFromList"></EmailAddressesEditor>
+
+
+		<div class="form-group">
+			<label>Subject:</label><br />
+			<InputText class="w-100" @bind-Value="SendForm.Subject" DisplayName="Subject" />
+		</div>
+		<div class="form-group">
+			<label>Letter:</label><br />
+			<InputTextArea class="w-100" style="height: 350px;" @bind-Value="SendForm.Content" DisplayName="Letter" />
+		</div>
+		<div class="form-group">
+			<label>Schedule Date:</label><br />
+			<InputDate @bind-Value="SendForm.ScheduleDate" DisplayName="Schedule date" />
+		</div>
+
+		<div class="form-group">
+			<button @onclick="SendMail">Send</button>
+			<button @onclick="ScheduleSend">Schedule Send</button>
+		</div>
+	</EditForm>
+</div>
+
+@code {
+	private EmailSendForm SendForm { get; set; } = new();
+	public List<EmailAddress> SendToList { get; set; } = new List<EmailAddress>();
+	public List<EmailAddress> SendFromList { get; set; } = new List<EmailAddress>();
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if(!firstRender) return;
+		var token = await GetToken();
+		_emailSendService.SetToken(token);
+	}
+
+	private async Task SendMail()
+	{
+		SendForm.CopyData(out var email, out _);
+		email.ToAddresses = SendToList.ToList();
+		email.FromAddresses = SendFromList.ToList();
+
+		await _emailSendService.SendImmediately(email);
+	}
+
+	private async Task ScheduleSend()
+	{
+		SendForm.CopyData(out var email, out var scheduleDate);
+		email.ToAddresses = SendToList.ToList();
+		email.FromAddresses = SendFromList.ToList();
+
+		await _emailSendService.ScheduleSend(email, scheduleDate);
+	}
+
+	private async Task<string> GetToken()
+	{
+		var token = await _protectedLocalStorage.GetAsync<string>("accessToken");
+		return token.Value;
+	}
+
+	public sealed class EmailSendForm
+	{
+		public string Subject { get; set; }
+		public string Content { get; set; }
+		public DateTime ScheduleDate { get; set; } = DateTime.Now.AddHours(2);
+
+		public void CopyData(out EmailMessage message, out DateTime scheduleDate)
+		{
+			message = new EmailMessage()
+				{
+					Subject = Subject,
+					Content = Content,
+				};
+			scheduleDate = ScheduleDate;
+		}
+	}
+}

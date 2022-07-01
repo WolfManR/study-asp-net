@@ -1,0 +1,43 @@
+﻿@using TemplatesReporter.Mail.Core
+<div class="form-group mb-3">
+	<h5 class="card-title text-info mb-3">@Header</h5>
+	<div class="row ml-2">
+		<div class="mr-4">
+			<label>Name</label><br/>
+			<InputText @bind-Value="Name" DisplayName="Name"/>
+		</div>
+		<div class="mr-4">
+			<label>Address</label><br/>
+			<InputText @bind-Value="Address" DisplayName="Address"/>
+		</div>
+		<button @onclick="AddToContactInfoToSendToList">Add</button>
+	</div>
+
+	<div class="row mt-1 ml-2">
+		@foreach (var address in Addresses)
+		{
+			<div class="card mr-1 p-1">
+				<p>@address.Address</p>
+				<p>@address.Name</p>
+			</div>
+		}
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public List<EmailAddress> Addresses { get; set; }
+
+	[Parameter]
+	public string Header { get; set; }
+
+	private string Name { get; set; }
+	private string Address { get; set; }
+
+	private void AddToContactInfoToSendToList()
+	{
+		Addresses.Add(new EmailAddress() { Name = Name, Address = Address });
+		Name = null;
+		Address = null;
+	}
+}

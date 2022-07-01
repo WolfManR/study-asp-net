@@ -1,0 +1,112 @@
+﻿@page "/"
+@using TemplatesReporter.Site.Data
+@using TemplatesReporter.ApiClients
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject TemplatesRepository _templatesRepository
+@inject ProtectedLocalStorage _protectedLocalStorage
+@inject AuthenticationService _authenticationService
+
+<PageTitle>Home</PageTitle>
+
+<div>
+	@if (!IsAuthenticated)
+	{
+		<p>You must login to get access to service</p>
+	}
+	else
+	{
+		<button @onclick="()=>OpenRecordEditor()">Create</button>
+
+		<h3>Created templates</h3>
+
+		@if (IsTemplatesVisible)
+		{
+			<table>
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>RawTemplate</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (TemplateRecord template in Templates)
+				{
+					<tr>
+						<td>@template.Name</td>
+						<td>@template.RawTemplate</td>
+						<td>
+							<button @onclick="() => OpenRecordEditor(template.Name, template.RawTemplate)">Edit</button>
+							<button @onclick="() => DeleteRecord(template.Name)">Delete</button>
+						</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		}
+	
+		@if (IsTemplateEditorVisible)
+		{
+			<TemplateEditor Template="@TemplateRecordOnEdit"
+			                OnCreateDone="HandleTemplateCreate"
+			                OnEditDone="HandleTemplateEdit">
+
+			</TemplateEditor>
+		}
+	}
+</div>
+
+@code {
+	[CascadingParameter]
+	private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+	private ICollection<TemplateRecord> Templates { get; set; }
+
+	private bool IsAuthenticated { get; set; }
+	private bool IsTemplatesVisible { get; set; }
+	private bool IsTemplateEditorVisible { get; set; }
+
+	private TemplateRecord TemplateRecordOnEdit { get; set; } = new();
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+		var authState = await AuthenticationStateTask;
+
+		if (authState.User.Identity?.IsAuthenticated is true) IsAuthenticated = true;
+
+		Templates = _templatesRepository.Get().ToList();
+		IsTemplatesVisible = true;
+
+		StateHasChanged();
+	}
+
+	private void OpenRecordEditor(string? name = null, string? rawTemplate = null)
+	{
+		TemplateRecordOnEdit.Name = name;
+		TemplateRecordOnEdit.RawTemplate = rawTemplate;
+		IsTemplateEditorVisible = true;
+	}
+
+	private void DeleteRecord(string name)
+	{
+		_templatesRepository.Remove(name);
+		Templates = _templatesRepository.Get().ToList();
+	}
+
+	private void HandleTemplateCreate(TemplateRecord record)
+	{
+		Templates.Add(record);
+		_templatesRepository.Save(record);
+		IsTemplateEditorVisible = false;
+	}
+
+	private void HandleTemplateEdit(TemplateRecord record)
+	{
+		if(Templates.FirstOrDefault(r => r.Name == record.Name) is not {} existRecord) return;
+		existRecord.Name = record.Name;
+		existRecord.RawTemplate = record.RawTemplate;
+		_templatesRepository.Save(record);
+		IsTemplateEditorVisible = false;
+	}
+
+}
