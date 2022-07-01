@@ -1,0 +1,65 @@
+﻿@using TemplatesReporter.Site.Services
+@using Microsoft.AspNetCore.Components
+@using TemplatesReporter.Site.Data
+@using TemplatesReporter.ApiClients
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject WebApiAuthenticationStateProvider _authenticationStateProvider
+@inject NavigationManager _navigationManager
+@inject ProtectedLocalStorage _protectedLocalStorage
+@inject AuthenticationService _authenticationService
+
+<EditForm Model="@_credentials" OnValidSubmit="@RegisterUser">
+	<div>
+		<br /><br /><br /><br /><br />
+	</div>
+	<div>
+		<h3 style="font-weight:bold; color:purple">Template mail sender register</h3>
+	</div>
+	<div>
+		<br />
+	</div>
+	<div class="col-12 row">
+		<input class="form-control col-12" @bind="_credentials.Login" placeholder="email address" />
+	</div>
+	<br />
+	<div class="col-12 row">
+		<input type="password" class="form-control col-12" @bind="_credentials.Password" placeholder="password" />
+	</div>
+	<br />
+	<div class="col-12 row">
+		<span class="col-12"></span>
+		<input type="submit" class="form-control col-6 btn btn-primary" value="Sign up" />
+		<a href="/" class="col-6">Already an user?</a>
+	</div>
+	<br />
+	<div class="col-12 row" style="text-align:left; font-weight:bold">
+		<span class="col-12">@LoginMessage</span>
+	</div>
+</EditForm>
+
+@code {
+	private Credentials _credentials;
+	private string LoginMessage { get; set; }
+
+	protected override Task OnInitializedAsync()
+	{
+		_credentials = new Credentials();
+		return base.OnInitializedAsync();
+	}
+
+	private async Task<bool> RegisterUser()
+	{
+		var isRegistered = await _authenticationService.RegisterAsync(_credentials);
+
+		if(isRegistered)
+		{   
+			_navigationManager.NavigateTo("/");
+		}
+		else
+		{
+			LoginMessage = "Invalid username or password";
+		}        
+        
+		return await Task.FromResult(true);
+	}
+}

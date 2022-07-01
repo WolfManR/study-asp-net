@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using TemplatesReporter.Site.Services
+@inherits LayoutComponentBase
+@inject NavigationManager _navigationManager
+@inject AuthenticationStateProvider _authenticationStateProvider
 
 <PageTitle>TemplatesReporter.Site</PageTitle>
 
@@ -9,7 +12,14 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+	        <AuthorizeView>
+		        <Authorized>
+			        <a href="/" @onclick="Logout">Logout</a>
+		        </Authorized>
+		        <NotAuthorized>
+			        <a href="/">Login</a>
+		        </NotAuthorized>
+	        </AuthorizeView>
         </div>
 
         <article class="content px-4">
@@ -17,3 +27,12 @@
         </article>
     </main>
 </div>
+
+@code{
+
+	private async Task Logout()
+	{
+		await ((WebApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+		_navigationManager.NavigateTo("");
+	}
+}
