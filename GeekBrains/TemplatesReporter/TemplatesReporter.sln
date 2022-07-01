@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Site", "Site", "{8E71CA81-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.Site.Data", "TemplatesReporter.Site.Data\TemplatesReporter.Site.Data.csproj", "{D07924AA-BAA7-4047-8EBE-4D3863696E30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplatesReporter.ApiClients", "TemplatesReporter.ApiClients\TemplatesReporter.ApiClients.csproj", "{1361FE8D-09B2-4520-A385-0B8D7F3AB561}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{D07924AA-BAA7-4047-8EBE-4D3863696E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D07924AA-BAA7-4047-8EBE-4D3863696E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D07924AA-BAA7-4047-8EBE-4D3863696E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1361FE8D-09B2-4520-A385-0B8D7F3AB561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1361FE8D-09B2-4520-A385-0B8D7F3AB561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1361FE8D-09B2-4520-A385-0B8D7F3AB561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1361FE8D-09B2-4520-A385-0B8D7F3AB561}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{F1C117C3-B84A-409D-ADCF-F0C54D24C243} = {F50B2FEA-7DA3-4128-B807-DFE328408FA0}
 		{908755BF-7875-4BEA-90F9-442B7D9596F7} = {F50B2FEA-7DA3-4128-B807-DFE328408FA0}
 		{D07924AA-BAA7-4047-8EBE-4D3863696E30} = {8E71CA81-332A-42A4-B08A-132BC4C10E48}
+		{1361FE8D-09B2-4520-A385-0B8D7F3AB561} = {8E71CA81-332A-42A4-B08A-132BC4C10E48}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58AD6A38-B51F-4D33-8249-98A6DA89E7DF}
