@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TemplatesReporter.AuthenticationRules\TemplatesReporter.AuthenticationRules.csproj" />
+    <ProjectReference Include="..\TemplatesReporter.Mail.Core\TemplatesReporter.Mail.Core.csproj" />
+    <ProjectReference Include="..\TemplatesReporter.Mail.MailKit\TemplatesReporter.Mail.MailKit.csproj" />
+    <ProjectReference Include="..\TemplatesReporter.MailsSender.Data\TemplatesReporter.MailsSender.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Jobs\" />
+  </ItemGroup>
+
+</Project>
