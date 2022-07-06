@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Bank.Accounts.Data\Bank.Accounts.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

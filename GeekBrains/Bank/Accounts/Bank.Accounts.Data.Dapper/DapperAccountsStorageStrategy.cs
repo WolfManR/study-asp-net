@@ -1,7 +1,6 @@
-﻿using Bank.Accounts.Data;
-using Dapper;
+﻿using Dapper;
 
-namespace Banks.Accounts.Data.Dapper;
+namespace Bank.Accounts.Data.Dapper;
 
 public sealed class DapperAccountsStorageStrategy : IAccountsStorageStrategy
 {

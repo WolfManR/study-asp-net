@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Banks.Accounts.Data.Dapper.Migrations;
+namespace Bank.Accounts.Data.Dapper.Migrations;
 
 [Migration(1)]
 public class AccountsMigration : Migration
