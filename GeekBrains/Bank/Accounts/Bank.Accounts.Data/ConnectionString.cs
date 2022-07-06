@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Bank.Data;
+namespace Bank.Accounts.Data;
 
 public sealed class ConnectionString
 {
