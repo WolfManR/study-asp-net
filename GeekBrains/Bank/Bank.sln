@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Authentication.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.IdentityServer", "Authentication\Bank.IdentityServer\Bank.IdentityServer.csproj", "{76323E65-E3A7-416C-B2B6-B7DA7DCAE7E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{D62424D0-E89D-4737-B9E1-80F800C4CC6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{76323E65-E3A7-416C-B2B6-B7DA7DCAE7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76323E65-E3A7-416C-B2B6-B7DA7DCAE7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76323E65-E3A7-416C-B2B6-B7DA7DCAE7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62424D0-E89D-4737-B9E1-80F800C4CC6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62424D0-E89D-4737-B9E1-80F800C4CC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62424D0-E89D-4737-B9E1-80F800C4CC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62424D0-E89D-4737-B9E1-80F800C4CC6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
