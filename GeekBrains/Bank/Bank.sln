@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.AccountsServer", "Acco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banks.Accounts.Data.Dapper", "Accounts\Banks.Accounts.Data.Dapper\Banks.Accounts.Data.Dapper.csproj", "{3D96BB32-47B8-426C-898A-9AFC4C192A26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Accounts.Data.EF", "Accounts\Bank.Accounts.Data.EF\Bank.Accounts.Data.EF.csproj", "{C98445A0-E94B-4287-80E9-F24F9041E844}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{3D96BB32-47B8-426C-898A-9AFC4C192A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D96BB32-47B8-426C-898A-9AFC4C192A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D96BB32-47B8-426C-898A-9AFC4C192A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98445A0-E94B-4287-80E9-F24F9041E844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98445A0-E94B-4287-80E9-F24F9041E844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98445A0-E94B-4287-80E9-F24F9041E844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98445A0-E94B-4287-80E9-F24F9041E844}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{431ABE52-1D3E-4B17-A5E3-53A545BF27D6} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
 		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
 		{3D96BB32-47B8-426C-898A-9AFC4C192A26} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
+		{C98445A0-E94B-4287-80E9-F24F9041E844} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6E8A94E-ABB3-492F-B192-B07F440A80E0}
