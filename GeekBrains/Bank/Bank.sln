@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{AC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Accounts.Data", "Accounts\Bank.Accounts.Data\Bank.Accounts.Data.csproj", "{431ABE52-1D3E-4B17-A5E3-53A545BF27D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.AccountsServer", "Accounts\Bank.AccountsServer\Bank.AccountsServer.csproj", "{A4D864B1-6C85-41C3-9678-FB5C716A5DD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{431ABE52-1D3E-4B17-A5E3-53A545BF27D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{431ABE52-1D3E-4B17-A5E3-53A545BF27D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{431ABE52-1D3E-4B17-A5E3-53A545BF27D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{2281D567-F1B7-462E-9401-5B6623B710AB} = {9B0F9316-BD40-41C1-BC59-25DAA4DFFABC}
 		{76323E65-E3A7-416C-B2B6-B7DA7DCAE7E8} = {9B0F9316-BD40-41C1-BC59-25DAA4DFFABC}
 		{431ABE52-1D3E-4B17-A5E3-53A545BF27D6} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
+		{A4D864B1-6C85-41C3-9678-FB5C716A5DD2} = {AC18C8DD-8B80-4D7B-B529-1BBD9DD2E074}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6E8A94E-ABB3-492F-B192-B07F440A80E0}
