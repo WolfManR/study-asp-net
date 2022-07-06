@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Bank.Authentication.Data\Bank.Authentication.Data.csproj" />
+    <ProjectReference Include="..\Bank.AuthenticationRules\Bank.AuthenticationRules.csproj" />
   </ItemGroup>
 
 </Project>
