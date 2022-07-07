@@ -1,0 +1,89 @@
+version: '3.4'
+
+services:
+  bank.identityserver:
+    image: ${DOCKER_REGISTRY-}bankidentityserver
+    build:
+      context: .
+      dockerfile: Authentication/Bank.IdentityServer/Dockerfile
+    environment:
+      ConnectionStrings__Identity: ${POSTGRESIDENTITYEFCORE};
+   
+      JwtSettings__SecureCode: ${IDENTITYSECURECODE}
+      JwtSettings__ValidAudience: crud_cards_webapi
+      JwtSettings__ValidIssuer: identity_server
+    ports:
+     - 5685:80
+    depends_on:
+     - identitydb
+
+  bank.accountsserver:
+    image: ${DOCKER_REGISTRY-}bankaccountsserver
+    build:
+      context: .
+      dockerfile: Accounts/Bank.AccountsServer/Dockerfile
+    environment:
+       ConnectionStrings__EF__Host: db
+       ConnectionStrings__EF__Database: DebetCardsEF
+       ConnectionStrings__EF__UserId: ${POSTGRESUSER}
+       ConnectionStrings__EF__Password: ${POSTGRESPASSWORD}
+
+       ConnectionStrings__Dapper__Host: db
+       ConnectionStrings__Dapper__Database: DebetCardsDapper
+       ConnectionStrings__Dapper__UserId: ${POSTGRESUSER}
+       ConnectionStrings__Dapper__Password: ${POSTGRESPASSWORD}
+    ports:
+      - 5684:80
+    depends_on:
+      - db
+
+  identitydb:
+   image: postgres
+   restart: always
+   environment:
+     POSTGRES_PASSWORD: ${POSTGRESUSER}
+     POSTGRES_USER: ${POSTGRESPASSWORD}
+   ports:
+   - ${POSTGRESIDENTITYOUTPORT}:5432
+   volumes:
+   - ./tarxosgbsafetydata:/var/lib/postgresql/identitydata
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRESPASSWORD}
+      POSTGRES_USER: ${POSTGRESUSER}
+    ports:
+      - 5682:5432
+    volumes:
+      - ./tarxosgbsafetydata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8735:8080
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus-grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+       
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./prometheus-grafana/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./prometheus-grafana/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+    ports:
+      - 3000:3000
+    links:
+      - prometheus
+
+volumes:
+  tarxosgbsafetydata:
+
+networks:
+  database:
