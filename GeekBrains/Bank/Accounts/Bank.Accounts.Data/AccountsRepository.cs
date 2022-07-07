@@ -2,31 +2,30 @@
 
 public class AccountsRepository
 {
-    private readonly IAccountsStorageStrategy _storage;
-
-    public AccountsRepository(IAccountsStorageStrategy storage)
-    {
-        _storage = storage;
-    }
+    public IAccountsStorageStrategy? StorageStrategy { get; set; }
 
     public async Task<int> Create(string holder)
     {
+        if(StorageStrategy is null) throw new ArgumentNullException(nameof(StorageStrategy));
         var account = new Account() { Holder = holder };
-        return await _storage.Create(account);
+        return await StorageStrategy.Create(account);
     }
 
     public async Task Delete(int id)
     {
-        await _storage.Delete(id);
+        if (StorageStrategy is null) throw new ArgumentNullException(nameof(StorageStrategy));
+        await StorageStrategy.Delete(id);
     }
 
     public Task<IEnumerable<Account>> Get()
     {
-        return _storage.Get();
+        if (StorageStrategy is null) throw new ArgumentNullException(nameof(StorageStrategy));
+        return StorageStrategy.Get();
     }
 
     public async Task<Account> Get(int id)
     {
-        return await _storage.Get(id);
+        if (StorageStrategy is null) throw new ArgumentNullException(nameof(StorageStrategy));
+        return await StorageStrategy.Get(id);
     }
 }
