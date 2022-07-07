@@ -1,3 +1,6 @@
+using App.Metrics.AspNetCore;
+using App.Metrics;
+using App.Metrics.Formatters.Prometheus;
 using Bank.Accounts.Data;
 using Bank.Accounts.Data.Dapper;
 using Bank.Accounts.Data.EF;
@@ -53,6 +56,18 @@ builder.Services
 
 builder.Services.AddScoped<AccountsRepository>();
 
+builder.Services.AddMetrics(metricsBuilder => metricsBuilder
+    .OutputMetrics.AsPrometheusPlainText()
+    .OutputMetrics.AsPrometheusProtobuf());
+
+builder.Host
+    .UseMetricsWebTracking()
+    .UseMetrics(o => o.EndpointOptions = mo =>
+    {
+        mo.MetricsTextEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
+        mo.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
+        mo.EnvironmentInfoEndpointEnabled = false;
+    });
 
 var app = builder.Build();
 

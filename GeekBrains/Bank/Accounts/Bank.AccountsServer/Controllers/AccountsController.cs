@@ -1,4 +1,6 @@
-﻿using Bank.Accounts.Data;
+﻿using App.Metrics;
+using Bank.Accounts.Data;
+using Bank.AccountsServer.Metrics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bank.AccountsServer.Controllers;
@@ -7,11 +9,15 @@ namespace Bank.AccountsServer.Controllers;
 public abstract class AccountsController : ControllerBase
 {
     private readonly AccountsRepository _accountsRepository;
+    private readonly IMetrics _metrics;
 
-    protected AccountsController(AccountsRepository accountsRepository)
+    protected AccountsController(AccountsRepository accountsRepository, IMetrics metrics)
     {
         _accountsRepository = accountsRepository;
+        _metrics = metrics;
     }
+
+    protected abstract string MetricsContext { get; }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -33,6 +39,9 @@ public abstract class AccountsController : ControllerBase
     {
         var id = await _accountsRepository.Create(holder);
         if (id <= 0) return BadRequest();
+
+        _metrics.Measure.Counter.Increment(DatabaseMetricsRegistry.CreatedAccountsCounter(MetricsContext));
+
         return Ok(id);
     }
 

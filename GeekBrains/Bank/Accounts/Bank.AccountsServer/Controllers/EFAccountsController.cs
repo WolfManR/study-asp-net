@@ -1,4 +1,5 @@
-﻿using Bank.Accounts.Data;
+﻿using App.Metrics;
+using Bank.Accounts.Data;
 using Bank.Accounts.Data.EF;
 
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bank.AccountsServer.Controllers;
 
 [Route("accounts/ef")]
-public class EFAccountsController : AccountsController
+public sealed class EFAccountsController : AccountsController
 {
-    public EFAccountsController(AccountsRepository accountsRepository, EFAccountsStorageStrategy storageStrategy) : base(accountsRepository)
+    public EFAccountsController(
+        AccountsRepository accountsRepository,
+        EFAccountsStorageStrategy storageStrategy,
+        IMetrics metrics) 
+        : base(accountsRepository, metrics)
     {
         accountsRepository.StorageStrategy = storageStrategy;
     }
+
+    protected override string MetricsContext => "EF";
 }
