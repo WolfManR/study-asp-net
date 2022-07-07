@@ -5,6 +5,4 @@
 [Oo]bj
 
 *.csproj.user
-appsettings.Development.json
 *.db
-*.env
