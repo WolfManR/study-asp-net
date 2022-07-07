@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Books.Data", "Catal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Catalog\Catalog.csproj", "{E75301F6-3852-44BD-A675-0FD9516AC048}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Site", "Catalog.Site\Catalog.Site.csproj", "{F9FE148B-6D41-41F3-8659-D6DEEFC3AB91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E75301F6-3852-44BD-A675-0FD9516AC048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E75301F6-3852-44BD-A675-0FD9516AC048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E75301F6-3852-44BD-A675-0FD9516AC048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9FE148B-6D41-41F3-8659-D6DEEFC3AB91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9FE148B-6D41-41F3-8659-D6DEEFC3AB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9FE148B-6D41-41F3-8659-D6DEEFC3AB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9FE148B-6D41-41F3-8659-D6DEEFC3AB91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
