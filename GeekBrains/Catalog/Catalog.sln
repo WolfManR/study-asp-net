@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Books", "Catalog.Books\Catalog.Books.csproj", "{672CC0C7-B2A8-4163-8598-9A9BE06E153F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo4j.Core", "Neo4j.Core\Neo4j.Core.csproj", "{0AE63C24-90ED-4BB8-B15B-DC554584F51B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{672CC0C7-B2A8-4163-8598-9A9BE06E153F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{672CC0C7-B2A8-4163-8598-9A9BE06E153F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{672CC0C7-B2A8-4163-8598-9A9BE06E153F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AE63C24-90ED-4BB8-B15B-DC554584F51B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AE63C24-90ED-4BB8-B15B-DC554584F51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AE63C24-90ED-4BB8-B15B-DC554584F51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AE63C24-90ED-4BB8-B15B-DC554584F51B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
