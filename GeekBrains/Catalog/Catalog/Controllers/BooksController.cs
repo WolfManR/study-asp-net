@@ -42,11 +42,3 @@ public class BooksController : ControllerBase
         }
     }
 }
-
-public record StoreBooksRequest(Book Book, Author Author, int Amount);
-public record BookResponse()
-{
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string Author { get; set; }
-}
