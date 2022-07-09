@@ -1,7 +1,31 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<div class="card col-3 bg-light">
+	<span class="m-2"><b>Books</b>: @Books.Count</span>
+</div>
 
-<h1>Hello, world!</h1>
+<div style="display: flex">
+	<div class="flex-grow-1 card overflow-auto mt-4" style="height: 400px;">
+		<Virtualize Items="@Books" Context="book">
+			<BookView Book="@book"/>
+		</Virtualize>
+	</div>
 
-Welcome to your new app.
+	<div class="m-4 flex-grow-1">
+		<RegisterBookForm OnBookGenerated="AddBook"/>
+	</div>
+</div>
+@code{
+	private List<BookResponse> Books { get; set; } = new();
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		
+	}
+
+	private Task AddBook(StoreBooksRequest arg)
+	{
+		return null;
+	}
+
+}
