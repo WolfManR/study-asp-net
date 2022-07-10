@@ -1,0 +1,18 @@
+﻿<div class="form-control flex-row">
+	<label>Title</label>
+	<input type="text" @bind="Form.Title" />
+	<button @onclick="Search">Search</button>
+</div>
+
+@code {
+	private BookQueryForm Form { get; set; } = new();
+
+	[Parameter]
+	public EventCallback<BookQueryForm> OnSearch { get; set; }
+
+	private async Task Search()
+	{
+		if (!OnSearch.HasDelegate) return;
+		await OnSearch.InvokeAsync(Form);
+	}
+}

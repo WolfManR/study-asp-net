@@ -2,6 +2,10 @@
 @using Catalog.Site.Services
 @inject IBooksCatalogClient BooksCatalogClient
 
+<div class="mt-2 mb-2 col-8">
+	<BooksSearchBar OnSearch="Search"/>
+</div>
+
 <div class="card col-3 bg-light">
 	<span class="m-2"><b>Books</b>: @Books.Count</span>
 </div>
@@ -31,13 +35,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		if (!firstRender) return;
-
-		IsLoading = true;
-		var stored = await BooksCatalogClient.ListStored();
-		Books.AddRange(stored);
-		IsLoading = false;
-		StateHasChanged();
+		if (firstRender) await Search();
 	}
 
 	private async Task AddBook(StoreBooksRequest request)
@@ -48,12 +46,33 @@
 		if (book is not null)
 		{
 			book.Amount = count;
-			//StateHasChanged();
+			StateHasChanged();
 			return;
 		}
 
 		book = request.Info();
 		Books.Add(book);
-		//StateHasChanged();
+		StateHasChanged();
+	}
+
+	private async Task Search(BookQueryForm? queryData = null)
+	{
+		IsLoading = true;
+
+		IEnumerable<BookInfo> books;
+		if (queryData is null or { IsEmpty: true })
+		{
+			books = await BooksCatalogClient.ListStored();
+		}
+		else
+		{
+			books = await BooksCatalogClient.Search(queryData.Title);
+		}
+		
+		Books.Clear();
+		Books.AddRange(books);
+
+		IsLoading = false;
+		StateHasChanged();
 	}
 }
