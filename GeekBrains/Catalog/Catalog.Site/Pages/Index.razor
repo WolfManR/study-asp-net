@@ -1,31 +1,65 @@
 ﻿@page "/"
+@using Catalog.Site.Services
+@inject IBooksCatalogClient BooksCatalogClient
 
 <div class="card col-3 bg-light">
 	<span class="m-2"><b>Books</b>: @Books.Count</span>
 </div>
 
 <div style="display: flex">
-	<div class="flex-grow-1 card overflow-auto mt-4" style="height: 400px;">
-		<Virtualize Items="@Books" Context="book">
-			<BookView Book="@book"/>
-		</Virtualize>
-	</div>
+	@if (IsLoading)
+	{
+		<span>Loading...</span>
+	}
+	else
+	{
+		<div class="flex-grow-1 card overflow-auto mt-4" style="height: 400px;">
+			<Virtualize Items="@Books" Context="book">
+				<BookView Book="@book" />
+			</Virtualize>
+		</div>
+	}
 
 	<div class="m-4 flex-grow-1">
-		<RegisterBookForm OnBookGenerated="AddBook"/>
+		<RegisterBookForm OnBookGenerated="AddBook" />
 	</div>
 </div>
-@code{
+
+@code {
 	private List<BookResponse> Books { get; set; } = new();
+	private bool IsLoading { get; set; }
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		
+		if (!firstRender) return;
+
+		IsLoading = true;
+		var stored = await BooksCatalogClient.ListStored();
+		Books.AddRange(stored);
+		IsLoading = false;
+		StateHasChanged();
 	}
 
-	private Task AddBook(StoreBooksRequest arg)
+	private async Task AddBook(StoreBooksRequest request)
 	{
-		return null;
-	}
+		await BooksCatalogClient.Store(request);
+		var count = await BooksCatalogClient.CountStored(request.Book.Title);
+		var book = Books.FirstOrDefault(b => b.Title == request.Book.Title);
+		if (book is not null)
+		{
+			book.Amount = count;
+			//StateHasChanged();
+			return;
+		}
 
+		book = new BookResponse()
+		{
+			Title = request.Book.Title,
+			Description = request.Book.Description,
+			Author = request.Author.FirstName + " " + request.Author.LastName,
+			Amount = request.Amount
+		};
+		Books.Add(book);
+		//StateHasChanged();
+	}
 }

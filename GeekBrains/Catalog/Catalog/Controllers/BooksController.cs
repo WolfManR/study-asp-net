@@ -38,6 +38,7 @@ public class BooksController : ControllerBase
             cache.Title = book.Title;
             cache.Description = book.Description;
             cache.Author = $"{book.AuthorFirstName} {book.AuthorLastName}";
+            cache.Amount = book.Amount;
             yield return cache;
         }
     }
