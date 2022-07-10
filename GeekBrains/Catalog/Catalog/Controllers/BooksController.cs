@@ -1,5 +1,5 @@
 ﻿using Catalog.Books;
-
+using Catalog.FullTextSearch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Controllers;
@@ -9,16 +9,19 @@ namespace Catalog.Controllers;
 public class BooksController : ControllerBase
 {
     private readonly IBooksRepository _booksRepository;
+    private readonly ElasticService _elasticService;
 
-    public BooksController(IBooksRepository booksRepository)
+    public BooksController(IBooksRepository booksRepository, ElasticService elasticService)
     {
         _booksRepository = booksRepository;
+        _elasticService = elasticService;
     }
 
     [HttpPost("store")]
     public async Task<IActionResult> Store([FromBody] StoreBooksRequest request)
     {
         await _booksRepository.Store(request.Book, request.Author, request.Amount);
+        _elasticService.IndexBook(request.Info());
         return Ok();
     }
 
@@ -30,23 +33,15 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
-    public async IAsyncEnumerable<BookResponse> ListStored()
+    public IAsyncEnumerable<BookInfo> ListStored()
     {
-        BookResponse cache = new();
-        await foreach (var book in _booksRepository.ListBooks())
-        {
-            cache.Title = book.Title;
-            cache.Description = book.Description;
-            cache.Author = $"{book.AuthorFirstName} {book.AuthorLastName}";
-            yield return cache;
-        }
+        return _booksRepository.ListBooks();
     }
-}
 
-public record StoreBooksRequest(Book Book, Author Author, int Amount);
-public record BookResponse()
-{
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string Author { get; set; }
+    [HttpGet("search/{bookTitle}")]
+    public async Task<IActionResult> Search([FromQuery] string bookTitle)
+    {
+        var result = await _elasticService.Search(bookTitle);
+        return Ok(result);
+    }
 }

@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  catalog:
+    image: catalogApi
+    build:
+      context: .
+      dockerfile: Catalog/Dockerfile
+
+  blazorapp:
+    image: catalogSite
+    build:
+      context: .
+      dockerfile: Catalog.Site/Dockerfile
+    ports:
+      - 8080:80
+
+  elasticsearch:
+    container_name: search
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2
+    restart: always
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    environment: 
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+
+  kibana:
+    container_name: kib
+    image: docker.elastic.co/kibana/kibana:7.17.2
+    restart: always
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
+
+volumes:
+  elastic:

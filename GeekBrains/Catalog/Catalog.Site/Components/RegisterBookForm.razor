@@ -1,0 +1,40 @@
+﻿<div class="form-control">
+	<div>
+		<label>Title</label>
+		<input type="text" @bind="Title"/>
+	</div>
+	<div>
+		<label>FirstName</label>
+		<input type="text" @bind="FirstName"/>
+	</div>
+	<div>
+		<label>LastName</label>
+		<input type="text" @bind="LastName"/>
+	</div>
+	<button class="mt-2" @onclick="GenerateBookAndSendToParent">Add</button>
+</div>
+@code {
+	private string? Title { get; set; }
+	private string? FirstName { get; set; }
+	private string? LastName { get; set; }
+
+	[Parameter]
+	public EventCallback<StoreBooksRequest> OnBookGenerated { get; set; }
+
+	private async Task GenerateBookAndSendToParent()
+	{
+		if(!OnBookGenerated.HasDelegate || Title is not {Length:>0} || FirstName is not {Length:>0} || LastName is not {Length:>0}) return;
+		StoreBooksRequest book = new(
+			new Book()
+			{
+				Title = Title
+			},  
+				new Author()
+			{
+				FirstName = FirstName,
+				LastName = LastName
+			},
+			1);
+		await OnBookGenerated.InvokeAsync(book);
+	}
+}
