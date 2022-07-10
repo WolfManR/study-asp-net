@@ -2,5 +2,5 @@
 
 public class Author : Person
 {
-
+    public string FullName => FirstName + " " + LastName;
 }

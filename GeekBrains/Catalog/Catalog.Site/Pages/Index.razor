@@ -52,13 +52,7 @@
 			return;
 		}
 
-		book = new BookInfo()
-		{
-			Title = request.Book.Title,
-			Description = request.Book.Description,
-			Author = request.Author.FirstName + " " + request.Author.LastName,
-			Amount = request.Amount
-		};
+		book = request.Info();
 		Books.Add(book);
 		//StateHasChanged();
 	}

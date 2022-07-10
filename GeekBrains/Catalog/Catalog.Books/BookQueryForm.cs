@@ -1,4 +1,4 @@
-﻿namespace Catalog.FullTextSearch;
+﻿namespace Catalog.Books;
 
 public class BookQueryForm
 {

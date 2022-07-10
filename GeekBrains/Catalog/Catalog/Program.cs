@@ -1,5 +1,6 @@
 using Catalog.Books;
 using Catalog.Books.Data;
+using Catalog.FullTextSearch;
 using Neo4j.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,10 @@ builder.Services
     })
     .AddScoped<Neo4jContext>()
     .AddScoped<IBooksRepository, BooksRepository>();
+
+var elasticConfiguration = builder.Configuration.GetSection("Elastic");
+builder.Services.Configure<ElasticConfiguration>(elasticConfiguration);
+builder.Services.AddScoped<ElasticService>();
 
 var app = builder.Build();
 

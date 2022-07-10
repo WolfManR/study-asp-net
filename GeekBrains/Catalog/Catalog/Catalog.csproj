@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Catalog.Books.Data\Catalog.Books.Data.csproj" />
+    <ProjectReference Include="..\Catalog.FullTextSearch\Catalog.FullTextSearch.csproj" />
   </ItemGroup>
 
 </Project>
