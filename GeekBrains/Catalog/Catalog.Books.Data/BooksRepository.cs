@@ -168,7 +168,7 @@ set st += {count: $amount}
     {
         const string query = @"
 match (b:Book) <- [st: Stored] - (a:Author)
-return b.title as title, b.description as description, a.firstName as authorFirstName, a.lastName as authorLastName, st.count as amount";
+return b.title as title, b.description as description, a.firstName + ' ' + a.lastName as author, st.count as amount";
 
         var cursor = await transaction.RunAsync(query);
 
@@ -176,8 +176,7 @@ return b.title as title, b.description as description, a.firstName as authorFirs
         {
             Title = record["title"].As<string>(),
             Description = record["description"].As<string>(),
-            AuthorFirstName = record["authorFirstName"].As<string>(),
-            AuthorLastName = record["authorLastName"].As<string>(),
+            Author = record["author"].As<string>(),
             Amount = record["amount"].As<long>()
         });
     }

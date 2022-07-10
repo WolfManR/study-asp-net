@@ -13,5 +13,5 @@ public interface IBooksCatalogClient
 
     [Get("/books")]
     // TODO: change to async enumerable when it will be released
-    Task<IEnumerable<BookResponse>> ListStored();
+    Task<IEnumerable<BookInfo>> ListStored();
 }

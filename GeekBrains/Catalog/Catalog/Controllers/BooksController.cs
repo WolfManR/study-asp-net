@@ -30,16 +30,8 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
-    public async IAsyncEnumerable<BookResponse> ListStored()
+    public IAsyncEnumerable<BookInfo> ListStored()
     {
-        BookResponse cache = new();
-        await foreach (var book in _booksRepository.ListBooks())
-        {
-            cache.Title = book.Title;
-            cache.Description = book.Description;
-            cache.Author = $"{book.AuthorFirstName} {book.AuthorLastName}";
-            cache.Amount = book.Amount;
-            yield return cache;
-        }
+        return _booksRepository.ListBooks();
     }
 }

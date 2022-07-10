@@ -26,7 +26,7 @@
 </div>
 
 @code {
-	private List<BookResponse> Books { get; set; } = new();
+	private List<BookInfo> Books { get; set; } = new();
 	private bool IsLoading { get; set; }
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -52,7 +52,7 @@
 			return;
 		}
 
-		book = new BookResponse()
+		book = new BookInfo()
 		{
 			Title = request.Book.Title,
 			Description = request.Book.Description,
